@@ -10,7 +10,8 @@ def make_screening_data(data_folder, df=None, data_path=None, name=None):
 
     if data_path:
         df = pd.read_csv(data_path)
-
+    # print(f"Type of df: {type(df)}")
+    # print(f"Columns in df: {df.columns if hasattr(df, 'columns') else 'N/A'}")
     df["monomer"] = df["smiles"]
     smiles = df["smiles"].value_counts().index
 

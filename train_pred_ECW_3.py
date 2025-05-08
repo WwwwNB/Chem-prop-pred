@@ -32,7 +32,7 @@ def train_and_predict(data_path, model_path, preds_path, gpu='false', gpu_number
     TRAINFEATS = f"{data_path}/f_full.csv"
 
     TEST = f"{data_path}/s_screen.csv"
-    TESTFEATS = f"{data_path}/f_screen.csv"
+    TESTFEATS = f"{data_path}/f_screen_2.csv"
 
     PREDS=  f"{preds_path}/preds_screen.csv"
     SAVEDIR = model_path
@@ -51,7 +51,7 @@ def train_and_predict(data_path, model_path, preds_path, gpu='false', gpu_number
     "--dropout", "0",
     "--ffn_num_layers", "3",
     "--hidden_size", "2400",
-    "--epochs", "5",
+    "--epochs", "25",
     "--pytorch_seed","5",
     ]
     
@@ -91,10 +91,10 @@ if __name__ == "__main__":
     
     if args.make_data == "true":
         print("Creating the cross validation data files for training!")
-        make_screening_data(DATADIR, f'{PATH_CHEM}/data/polyinfo_5salts_4conc.csv')
+        make_screening_data(data_folder=DATADIR,data_path=f'{PATH_CHEM}/data/clean_train_data.csv', name='screen')
     if args.train_predict == "true":
         print("Training loop begins!")
-        train_and_predict(DATADIR, MODELDIR, PREDS_PATH, args.gpu) 
+        train_and_predict(data_path=DATADIR, model_path=MODELDIR, preds_path=PREDS_PATH, gpu=args.gpu) 
     if args.polyinfo_datafiles == "true":
         screen_poly(DATADIR, SAVEPATH, PREDS_PATH)
-        
+        # /home/naibing/work/chemarr_fork/Chem-prop-pred/data/clean_train_data.csv
